@@ -176,6 +176,13 @@
   dependencies:
     "@formkit/utils" "1.2.1"
 
+"@formkit/core@1.5.9":
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/@formkit/core/-/core-1.5.9.tgz#0db0ba027349f59b9dec64fd950acab9c8bfd1fc"
+  integrity sha512-hkF2uwmXcyeGqrYAO1RN3me77NdRWhuH4pZP+A2xlGZqBLx98nvABYUfTiQsCmdnPv9RkGHHB7qTq9BOvFATHQ==
+  dependencies:
+    "@formkit/utils" "1.5.9"
+
 "@formkit/dev@1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@formkit/dev/-/dev-1.2.1.tgz#1dd9f2dea7b8981c62a7ca182af244a222d41520"
@@ -237,6 +244,11 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@formkit/utils/-/utils-1.2.1.tgz#097a913e7208284e28793cbd497cfb32e5892835"
   integrity sha512-PHu/VR3nQHr1Lt6wb+J9pbUfVWdqqX6Qdq0NSjmUEtkNzvQlvRPXHpWePHiPgNR60G7zLoPHfnoCclfOMetTOQ==
+
+"@formkit/utils@1.5.9":
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/@formkit/utils/-/utils-1.5.9.tgz#33150191433bf715862abc758494a8e3c25151fa"
+  integrity sha512-Jaa9Q89WovxMkNcRE0IK1G8WfHwg7MDkCx9FJRhqJ+e9wGW0C2+t/vAYp0D3kS42jpNK7TTPIcozh9q2VGSUdg==
 
 "@formkit/validation@1.2.1":
   version "1.2.1"
