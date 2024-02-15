@@ -3,7 +3,7 @@ import useFilesStore, { type Pattern } from '@/stores/files'
 import tranquilapi from '@/plugins/tranquilapi'
 import { useModal, VueFinalModal } from 'vue-final-modal'
 import { useToast } from 'vue-toast-notification'
-import { FunnelIcon } from '@heroicons/vue/24/outline'
+import { FunnelIcon, PlusIcon } from '@heroicons/vue/24/outline'
 import ScrollGrid from 'vue-virtual-scroll-grid'
 import { computed, onMounted, ref } from 'vue'
 import type { StyleValue } from 'vue'
@@ -13,6 +13,8 @@ import PatternModal from '@/components/modals/PatternModal.vue'
 import PatternGridItemPlaceholder from '@/components/PatternGridItemPlaceholder.vue'
 import PatternGridItem from '@/components/PatternGridItem.vue'
 import { FormKit } from '@formkit/vue'
+
+import NewPatternModal from '@/components/modals/NewPatternModal.vue'
 
 const files = useFilesStore()
 const toast = useToast()
@@ -95,6 +97,18 @@ const showPatternModal = async (pattern: Pattern) => {
   await open()
 }
 
+const showNewPatternModal = async () => {
+  const { open, close } = useModal({
+    component: NewPatternModal,
+    attrs: {
+      onClose: () => {
+        close()
+      }
+    }
+  })
+  await open()
+}
+
 //0 => downloaded
 //1 => all
 //2 => favorites
@@ -128,6 +142,14 @@ const sortModalOptions = [
         class="h-10 w-10 mt-4 bg-gray-700 p-1 flex items-center justify-center rounded-full group hover:bg-gray-800 duration-300 transform-gpu disabled:pointer-events-none disabled:opacity-50"
       >
         <FunnelIcon
+          class="w-6 h-6 text-gray-200 group-hover:text-blue-600 duration-300 transform-gpu"
+        />
+      </button>
+      <button
+        @click="showNewPatternModal"
+        class="h-10 w-10 mt-4 bg-gray-700 p-1 flex items-center justify-center rounded-full group hover:bg-gray-800 duration-300 transform-gpu disabled:pointer-events-none disabled:opacity-50"
+      >
+        <PlusIcon
           class="w-6 h-6 text-gray-200 group-hover:text-blue-600 duration-300 transform-gpu"
         />
       </button>
