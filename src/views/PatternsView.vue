@@ -33,7 +33,7 @@ const patternsScrollLength = computed(() => {
   return itemGetter.value.length
 })
 
-const itemGetter = computed(() => {
+const viewTypeItems = computed(() => {
   let rawItems: Pattern[] = []
   switch (viewType.value) {
     case 0:
@@ -46,6 +46,12 @@ const itemGetter = computed(() => {
       rawItems = files.favoritePatterns
       break
   }
+
+  return rawItems
+})
+
+const itemGetter = computed(() => {
+  let rawItems = viewTypeItems.value
 
   if (sortType.value === 0) {
     rawItems = rawItems.sort((a, b) => {
@@ -66,8 +72,14 @@ const itemGetter = computed(() => {
     })
   }
 
+  if (searchQuery.value != '') {
+    rawItems = rawItems.filter((pattern) => {
+      return pattern.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    })
+  }
+
   if (sortReverse.value) {
-    rawItems = rawItems.reverse()
+    rawItems = rawItems.slice().reverse()
   }
 
   if (sortNotDownloaded.value && viewType.value !== 0) {
@@ -122,6 +134,7 @@ const sortType = ref(0)
 const sortModalOpen = ref(false)
 const sortReverse = ref(false)
 const sortNotDownloaded = ref(false)
+const searchQuery = ref('');
 
 const sortModalOptions = [
   { label: 'Popularity', value: 0 },
@@ -157,7 +170,7 @@ const sortModalOptions = [
     <Transition name="fade" mode="out-in">
       <div
         class="w-full"
-        :key="viewType + sortType + (sortReverse ? 1 : 0) + (sortNotDownloaded ? 1 : 0)"
+        :key="viewType + sortType + (sortReverse ? 1 : 0) + (sortNotDownloaded ? 1 : 0) + searchQuery"
       >
         <ScrollGrid
           :length="patternsScrollLength"
@@ -176,12 +189,20 @@ const sortModalOptions = [
             <PatternGridItemPlaceholder />
           </template>
         </ScrollGrid>
-        <div v-else class="w-full flex justify-center">
+        <div v-else-if="viewTypeItems.length == 0" class="w-full flex justify-center">
           <div
             class="rounded-md border-2 border-gray-700 p-4 flex flex-col items-center max-w-sm gap-8"
           >
             <span class="font-medium text-lg">Oops</span>
             <span class="text-md">No patterns are downloaded to this device yet!</span>
+          </div>
+        </div>
+        <div v-else class="w-full flex justify-center">
+          <div
+            class="rounded-md border-2 border-gray-700 p-4 flex flex-col items-center max-w-sm gap-8"
+          >
+            <span class="font-medium text-lg">Oops</span>
+            <span class="text-md">No patterns match your search criteria! <span @click="searchQuery = ''" class="cursor-pointer text-blue-400">Reset</span></span>
           </div>
         </div>
       </div>
@@ -193,6 +214,12 @@ const sortModalOptions = [
       content-class="p-4 bg-gray-900 border-[3px] border-gray-800 rounded-2xl w-[70vw] max-w-sm flex flex-col"
       v-model="sortModalOpen"
     >
+    
+      <FormKit
+        type="text"
+        v-model="searchQuery"
+        label="Search patterns"
+      />
       <FormKit
         type="dropdown"
         :options="sortModalOptions"
