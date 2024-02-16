@@ -15,8 +15,8 @@ const formHandler = async (fields: { name: string }) => {
     name: fields.name,
     description: '',
     date: new Date().toISOString(),
-    patterns: ['2cbdae96-ec22-48b4-a369-bfc624463c5f'],
-    featured_pattern: '2cbdae96-ec22-48b4-a369-bfc624463c5f'
+    patterns: [],
+    featured_pattern: ''
   }
   files.playlists.push(newPlaylistObject)
   await files.saveManifest()

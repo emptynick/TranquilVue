@@ -7,6 +7,13 @@ export default {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  safelist: [
+    'h-64', 'w-64',
+    'h-72', 'w-72',
+    'h-80', 'w-80',
+    'h-96', 'w-96',
+    'h-128', 'w-128',
+  ],
   theme: {
     extend: {
       typography: (theme) => ({
@@ -31,9 +38,11 @@ export default {
           '30%, 50%, 70%': { transform: 'translate3d(-4px,0,0)'},
           '40%, 60%': { transform: 'translate3d(4px,0,0)'},
         }
+      },
+      spacing: {
+        '128': '32rem',
       }
     },
-
   },
   plugins: [Typography, FormKitVariants],
 }

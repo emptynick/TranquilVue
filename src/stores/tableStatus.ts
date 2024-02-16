@@ -58,6 +58,7 @@ export default defineStore('tableStatus', () => {
     repeatMode: false,
     pause: 0,
     Hmd: 0,
+    Homing: 0,
     wgConn: false
   })
 
@@ -157,6 +158,7 @@ export default defineStore('tableStatus', () => {
     raw.value.repeatMode = data.repeatMode ?? false
     raw.value.pause = data.pause ?? 0
     raw.value.Hmd = data.Hmd ?? 0
+    raw.value.Homing = data.Homing ?? 0
     raw.value.wgConn = data.wgConn ?? false
 
     //ap mode, start connection loop
@@ -186,6 +188,7 @@ export default defineStore('tableStatus', () => {
     ws.onmessage = async function (e) {
       const msg = await (e.data as Blob).text()
       _updateRaw(JSON.parse(msg))
+      console.log(msg);
     }
 
     ws.onclose = async function () {

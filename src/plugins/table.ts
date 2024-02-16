@@ -9,7 +9,7 @@ declare global {
   }
 }
 const http = axios.create({
-  baseURL: import.meta.env.PROD ? '/' : 'http://tranquil.local/'
+  baseURL: import.meta.env.PROD ? '/' : 'http://192.168.178.19/'
 })
 
 http.interceptors.response.use(

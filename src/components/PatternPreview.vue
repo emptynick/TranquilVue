@@ -132,7 +132,7 @@ const render = async () => {
   }
 
   context.value.strokeStyle = props.lineColor
-  context.value.lineWidth = 0.75
+  context.value.lineWidth = 2
 
   let dim = Math.min(canvasElement.value?.width ?? 0, canvasElement.value?.height ?? 0)
 

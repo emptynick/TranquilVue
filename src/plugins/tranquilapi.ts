@@ -13,7 +13,7 @@ declare global {
 const toast = useToast()
 
 const http = axios.create({
-  baseURL: 'https://tranquilapi.fiftytwo.workers.dev'
+  baseURL: 'http://localhost:3000'
 })
 
 http.interceptors.response.use(
