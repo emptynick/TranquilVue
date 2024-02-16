@@ -22,7 +22,7 @@ const toggleModel = ref(props.toggle ?? false)
 watch(
   () => props.toggle,
   () => {
-    toggleModel.value = props.toggle
+    toggleModel.value = props.toggle ?? false
   }
 )
 </script>

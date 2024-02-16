@@ -188,7 +188,6 @@ export default defineStore('tableStatus', () => {
     ws.onmessage = async function (e) {
       const msg = await (e.data as Blob).text()
       _updateRaw(JSON.parse(msg))
-      console.log(msg);
     }
 
     ws.onclose = async function () {

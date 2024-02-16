@@ -87,7 +87,6 @@ const changePreviewSize = () => {
 }
 
 const previewSizeClass = computed(() => {
-  console.log(previewSize.value)
   return [`w-${previewSize.value}`, `h-${previewSize.value}`]
 })
 
