@@ -19,8 +19,10 @@ const formHandler = async (data: { name: string, thumbnail: File, pattern: File 
       name: data.name,
       uuid: uuidv4(),
     }))
-    body.append('thumbData', data.thumbnail)
-    body.append('patternData', data.pattern)
+    // @ts-expect-error: Let's ignore a compile error like this unreachable code
+    body.append('thumbData', data.thumbnail[0].file as File)
+    // @ts-expect-error: Let's ignore a compile error like this unreachable code
+    body.append('patternData', data.pattern[0].file as File)
 
     let result = await tranquilapi.post('/patterns', body);
     toast.success(result.data)
@@ -35,7 +37,7 @@ const formHandler = async (data: { name: string, thumbnail: File, pattern: File 
     <ModalHeader title="Add pattern" @close="emit('close')" />
     <FormKit type="form" @submit="formHandler" submit-label="Add image">
       <FormKit type="text" name="name" id="name" label="Name" validation="required|text" />
-      <FormKit type="file" label="Thumbnail" name="thumbnail" accept=".png" validation="required" />
+      <FormKit type="file" label="Thumbnail" name="thumbnail" accept=".png,.svg,image/png,image/svg+xml" validation="required" />
       <FormKit type="file" label="Pattern" name="pattern" accept=".thr" validation="required" />
     </FormKit>
   </ModalTemplate>

@@ -13,7 +13,7 @@ declare global {
 const toast = useToast()
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://192.168.178.6:3000'
 })
 
 http.interceptors.response.use(
@@ -32,7 +32,7 @@ http.interceptors.response.use(
       return Promise.reject(error)
     }
 
-    if (e.response?.status === 401) {
+    if (e.response?.status === 401 || e.response?.status === 403) {
       toast.error('Please sign in again')
       window.authInProgress = true
       await showLoginModal()
